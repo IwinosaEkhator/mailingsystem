@@ -8,6 +8,7 @@ const LoginBtn = (props) => {
                     id="button" 
                     type="submit" 
                     value="Submit"
+                    className="form-btn"
                 >
                     Submit
                 </button>

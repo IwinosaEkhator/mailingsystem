@@ -100,11 +100,11 @@ a{
     display: inline;
 }
 
-.list-group{
+.list-group-n{
     padding-bottom: 10px;
 }
 
-.list-group input {
+.list-group-n input {
     width: 95%;
     border-radius: 8px;
     padding: 10px 10px;
@@ -114,11 +114,11 @@ a{
     border: #06AD50 solid 2px;
 }
 
-.list-group input::placeholder {
+.list-group-n input::placeholder {
     color: #06ad519f; /* Change placeholder color to gray (#999) */
 }
 
-.list-group input:focus {
+.list-group-n input:focus {
     box-shadow: #2167451e 0px 6px 12px -2px, #21674560 0px 3px 7px -3px;
     outline: none;
 }
@@ -131,20 +131,20 @@ input:focus:not(:focus-visible) {
     display: flex;
 }
 
-.li-group .list-group:first-child{
+.li-group .list-group-n:first-child{
     flex-basis: 100%;
     margin-right: 20px;
 }
 
-.li-group .list-group{
+.li-group .list-group-n{
     flex-basis: 100%;
 }
 
-.li-group .list-group input{
+.li-group .list-group-n input{
     width: 90%;
 }
 
-.list-group span{
+.list-group-n span{
     color: #06AD50;
 }
 
@@ -152,7 +152,7 @@ input:focus:not(:focus-visible) {
     margin-top: 50px;
 }
 
-button{
+.form-btn{
     border: none;
     background-color: #06AD50;
     padding: 12px 165px;
@@ -162,7 +162,7 @@ button{
     transition: .5s;
 }
 
-button:hover, button:active, button:focus{
+.form-btn:hover, .form-btn:active, .form-btn:focus{
     background-color: #216745;
 }
 
@@ -223,8 +223,12 @@ label{
         margin: 9.8% 5% 0;
     }
 
-    .list-group input{
-        width: 95%;
+    .list-group-n input{
+        width: 100%;
+    }
+
+    .li-group .list-group-n input{
+        width: 100%;
     }
 
     .con{
@@ -239,7 +243,7 @@ label{
     }
 
    
-    button{
+    .form-btn{
         padding: 12px 180px;
     }
 
@@ -295,7 +299,7 @@ label{
         margin: 0;
     }
 
-    button{
+    .form-btn{
         padding: 12px 150px;
     }
 
