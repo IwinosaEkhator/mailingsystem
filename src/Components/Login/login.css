@@ -152,7 +152,7 @@ input:focus:not(:focus-visible) {
     margin-top: 50px;
 }
 
-button{
+.form-btn{
     border: none;
     background-color: #06AD50;
     padding: 12px 165px;
@@ -162,7 +162,7 @@ button{
     transition: .5s;
 }
 
-button:hover, button:active, button:focus{
+.form-btn:hover, .form-btn:active, .form-btn:focus{
     background-color: #216745;
 }
 
@@ -239,7 +239,7 @@ label{
     }
 
    
-    button{
+    .form-btn{
         padding: 12px 180px;
     }
 
@@ -295,7 +295,7 @@ label{
         margin: 0;
     }
 
-    button{
+    .form-btn{
         padding: 12px 150px;
     }
 
