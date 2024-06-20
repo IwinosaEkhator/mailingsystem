@@ -1,160 +1,119 @@
-import React from "react";
+import React, { useState } from 'react';
+
 
 import "../Components/Admin/admin.css";
+import "./Login/login.css"
+import AdminFormComponents from './adminFormComp';
 
-
-
-const AdminForm = () => {
-
-    const prevBtns = document.querySelectorAll(".btn-prev");
-    const nextBtns = document.querySelectorAll(".btn-next");
-    const progress = document.querySelector(".progress");
-    const formSteps = document.querySelectorAll(".form-step");
-    const progressSteps = document.querySelectorAll(".progress-step");
-
-    let formStepsNum = 0;
-
-    /* Event Listener for Next Button. */
-    nextBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            formStepsNum++;
-            updateFormSteps();
-            updateProgressbar();
-        });
+const App = () => {
+    const [step, setStep] = useState(1);
+    const [formData, setFormData] = useState({
+        name: '',
+        from: '',
     });
 
-    /* Event Listener for Back Button. */
-    prevBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            formStepsNum--;
-            updateFormSteps();
-            updateProgressbar();
-        });
-    });
-
-    /* Updates Form Items */
-    function updateFormSteps() {
-        formSteps.forEach((formStep) => {
-            formStep.classList.contains("form-step-active") &&
-                formStep.classList.remove("form-step-active")
-        })
-        formSteps[formStepsNum].classList.add("form-step-active");
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     }
 
-    /* Updates Progress Bar */
-    function updateProgressbar() {
-        progressSteps.forEach((progressStep, index) => {
-            if (index < formStepsNum + 1) {
-                progressStep.classList.add('progress-step-active')
+    const nextStep = () => {
+        setStep(step + 1);
+    }
 
+    const prevStep = () => {
+        setStep(step - 1);
+    }
 
-            } else {
-                progressStep.classList.remove('progress-step-active')
-            }
-        })
-        progress.style.width = ((formStepsNum) / (progressSteps.length - 1)) * 100 + "%";
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form Data Submitted:', formData);
     }
 
     return (
-        <>
+        <div className="App">
+            <div style={{ display: "inline-block" }}>
+                <h1 style={{ textAlign: 'center', }}>Internal Delivery Note</h1>
+                <form className='admin-form' onSubmit={handleSubmit}>
+                    {step === 1 && (
+                        <div className='list-group'>
+                            {/* <h2>Step 1: Personal Details</h2> */}
 
-            <form action="#" class="form">
-                <h2 class="text-center">Registration Form</h2>
+                            <AdminFormComponents
+                                fName="Date"
+                                fPlaceholder=""
+                                fElement="date"
+                                fType="date"
+                                fOnChange={handleChange}
+                                fValue={formData.from}
+                            />
 
-                <div class="text-center"><a href="" target="_blank"></a></div>
+                            <AdminFormComponents
+                                fName="From"
+                                fPlaceholder=""
+                                fElement="from"
+                                fType="text"
+                                fOnChange={handleChange}
+                                fValue={formData.from}
+                            />
 
+                            <div className='li-group'>
+                                <AdminFormComponents
+                                    fName="To"
+                                    fPlaceholder=""
+                                    fElement="to"
+                                    fType="name"
+                                    fOnChange={handleChange}
+                                    fValue="Ekhator Iwinosa / npdc.b0011"
+                                />
 
-                <div class="progressbar">
-                    <div class="progress" id="progress"></div>
-                    <div class="progress-step progress-step-active" data-title="Basic"></div>
-                    <div class="progress-step" data-title="Contact"></div>
-                    <div class="progress-step" data-title="Social"></div>
-                    <div class="progress-step" data-title="Password"></div>
-                </div>
+                                <AdminFormComponents
+                                    fName="To"
+                                    fPlaceholder=""
+                                    fElement="to"
+                                    fType="name"
+                                    fOnChange={handleChange}
+                                    fValue="Ekhator Iwinosa / npdc.b0011"
+                                />
 
+                            </div>
 
-                <div class="form-step form-step-active">
-                    <div class="input-group">
-                        <label for="dob">Date </label>
-                        <input type="date" name="dob" id="dob" />
-                    </div>
-                    <div class="input-group">
-                        <label for="firstName">From:</label>
-                        <input type="text" name="firstName" id="firstName" />
-                    </div>
-                    <div className="input-group d-flex align-items-center">
-                        <label for="lastName">To:</label>
-                        <div className="d-flex flex-column ms-3">
-                            <p class="mb-0 text-underlined">Ekhator Iwinosa</p>
-                            <p class="mb-0">npdc.b5544</p>
-                            <p class="mb-0">Ekhator Iwinosa</p>
+                            <button className='admin-form-button' type="button" onClick={nextStep}>Next</button>
                         </div>
-                    </div>
-                    <div class="">
-                        <a href="#" class="btn-form btn-next width-50 ml-auto">Next</a>
-                    </div>
-                </div>
+                    )}
+                    {step === 2 && (
+                        <div>
+                            <h2>Step 2: Address Details</h2>
+                            <label className="admin-form-label">
+                                Address:
+                                <input type="text" name="address" value={formData.address} onChange={handleChange} />
+                            </label>
+                            <label className="admin-form-label">
+                                City:
+                                <input type="text" name="city" value={formData.city} onChange={handleChange} />
+                            </label>
+                            <button type="button" onClick={prevStep}>Back</button>
+                            <button type="button" onClick={nextStep}>Next</button>
+                        </div>
+                    )}
+                    {step === 3 && (
+                        <div>
+                            <h2>Step 3: Country Details</h2>
+                            <label className="admin-form-label">
+                                Country:
+                                <input type="text" name="country" value={formData.country} onChange={handleChange} />
+                            </label>
+                            <button className='admin-form-button' type="button" onClick={prevStep}>Back</button>
+                            <button className='admin-form-button' type="submit">Submit</button>
+                        </div>
+                    )}
+                </form>
+                {/* <div className="progress-bar">
+                <div style={{ width: `${(step / 3) * 100}%` }} className="progress"></div>
+            </div> */}
+            </div>
+        </div>
+    );
+}
 
-
-                <div class="form-step">
-                    <div class="input-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" />
-                    </div>
-                    <div class="input-group">
-                        <label for="email">Email Address</label>
-                        <input type="text" name="email" id="email" />
-                    </div>
-                    <div class="input-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="number" name="phone" id="phone" />
-                    </div>
-                    <div class="btns-group">
-                        <a href="#" class="btn-form btn-prev">Back</a>
-                        <a href="#" class="btn-form btn-next">Next</a>
-                    </div>
-                </div>
-
-
-                <div class="form-step">
-                    <div class="input-group">
-                        <label for="instagram">Instagram Username</label>
-                        <input type="text" name="instagram" id="instagram" />
-                    </div>
-                    <div class="input-group">
-                        <label for="text">Twitter Username</label>
-                        <input type="text" name="twitter" id="twitter" />
-                    </div>
-                    <div class="input-group">
-                        <label for="github">Github Username</label>
-                        <input type="text" name="github" id="github" />
-                    </div>
-                    <div class="btns-group">
-                        <a href="#" class="btn-form btn-prev">Back</a>
-                        <a href="#" class="btn-form btn-next">Next</a>
-                    </div>
-                </div>
-
-
-                <div class="form-step">
-                    <div class="input-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
-                    </div>
-                    <div class="input-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" />
-                    </div>
-                    <div class="btns-group">
-                        <a href="#" class="btn-form btn-prev">Back</a>
-                        <input type="submit" value="Register" class="btn-form" />
-                    </div>
-                </div>
-            </form>
-
-        </>
-    )
-};
-
-export default AdminForm;
+export default App;
