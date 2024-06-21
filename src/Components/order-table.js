@@ -23,7 +23,7 @@ class Ordertable extends Component {
         this.setState({
             status: 'declined'
         });
-        window.alert("Are you sure you want to reject this request?");
+        window.alert("Are you sure you want to reject this reques");
 
     }
 

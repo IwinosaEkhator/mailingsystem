@@ -671,11 +671,11 @@ header .image-text .profession{
 
 /* Global Styles */
 .App {
-  margin: 20px;
-  height: 100vh;
-  display: flex;
+  padding-top: 100px;
+  /* height: 100vh; */
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .admin-form {
@@ -685,8 +685,59 @@ header .image-text .profession{
   margin-top: 50px;
 }
 
+.App .list-group {
+  /* margin-bottom: 20px; */
+  border-radius: 5px;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.App .header {
+  border: 2px solid #06AD50;
+  border-radius: 5px;
+  width: 470px;
+  cursor: pointer;
+  padding: 10px;
+  color: #06AD50;
+  background-color: #fff;
+}
+
+.App .header button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.App .header button:hover {
+  color: #0056b3;
+}
+
+.form-content {
+  padding: 10px;
+  transition: height 0.3s ease-in-out;
+}
+
+.form-content textarea {
+  width: 100%;
+}
+
+.collapsed .form-content {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .admin-form-label {
   margin: 10px 0;
+}
+
+.li-group .list-group-n{
+  width: 0;
+}
+
+.App .li-group .list-group-n:first-child{
+  margin-right: 10px;
 }
 
 .list-group-n{
@@ -703,6 +754,10 @@ header .image-text .profession{
   height: 60px;
 }
 
+.li-group .admin-form-button{
+  flex: 100%;
+}
+
 .admin-form-button {
   margin: 40px 10px 10px;
   padding: 20px;
@@ -713,6 +768,21 @@ header .image-text .profession{
   color: #fff;
   border-radius: 8px;
   transition: .5s;
+}
+
+.App .item-no{
+  font-size: 30px;
+  font-weight: 600;
+
+}
+
+.li-group .config-request{
+  flex: 100%;
+}
+
+.config-request .disabled {
+  background-color: grey;
+  cursor: not-allowed;
 }
 
 .progress-bar {

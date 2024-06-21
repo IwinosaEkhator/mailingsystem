@@ -5,7 +5,7 @@ const AdminFormComponents = (props) => {
         <>
             <div className="list-group-n text-center">
                 <label htmlFor={props.fElement}>
-                    {props.fName} <span>:</span>
+                    {props.fName}
                 </label>
                 <input
                     onChange={props.fOnChange}
