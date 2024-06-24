@@ -23,7 +23,7 @@ class Ordertable extends Component {
         this.setState({
             status: 'declined'
         });
-        window.alert("Are you sure you want to reject this reques");
+        window.alert("Are you sure you want to reject this request");
 
     }
 
@@ -36,16 +36,16 @@ class Ordertable extends Component {
         return (
             <>
                 <tr>
-                <td>{idNum}</td>
-                <td>{tName}</td>
-                <td>{tItems}</td>
-                <td><span className={statusClass}>{statusText}</span></td>
-                <td>
-                    <button style={{ fontSize: "22px" }} className="btn"><AiOutlineEdit /></button>
-                    <button style={{ fontSize: "22px" }} className="btn" onClick={this.declinedChanges}><FaXmark /></button>
-                    <button style={{ fontSize: "22px" }} className="btn" onClick={this.approvedChanges}><FaCheck /></button>
-                </td>
-           </tr>
+                    <td>{idNum}</td>
+                    <td>{tName}</td>
+                    <td>{tItems}</td>
+                    <td><span className={statusClass}>{statusText}</span></td>
+                    <td>
+                        <button style={{ fontSize: "22px" }} className="btn"><AiOutlineEdit /></button>
+                        <button style={{ fontSize: "22px" }} className="btn" onClick={this.declinedChanges}><FaXmark /></button>
+                        <button style={{ fontSize: "22px" }} className="btn" onClick={this.approvedChanges}><FaCheck /></button>
+                    </td>
+                </tr>
 
             </>
         )
