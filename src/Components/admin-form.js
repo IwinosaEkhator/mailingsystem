@@ -39,7 +39,9 @@ const App = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Forms submitted:', formData);
+        console.log('Forms submitted:', formData, forms);
+        setSubmitted(true);
+        nextStep(); // Move to the thank you step
     };
 
     const addForm = () => {
@@ -187,7 +189,7 @@ const App = () => {
                                                 </div>
                                                 <div className='col-8 text-center'>
                                                     <h5>
-                                                        NNPC Energy & Petroleum Limited <br /> ( A Subsidiary of NNPC)
+                                                        NNPC E & P Limited <br /> ( A Subsidiary of NNPC)
                                                     </h5>
                                                     <h3>
                                                         <strong>Internal Delivery Note</strong>
@@ -212,7 +214,7 @@ const App = () => {
                                                 <div className="row">
                                                     <div className="col-sm-6">
                                                         <span>From</span>
-                                                        <strong>DM ITD</strong>
+                                                        <strong>Manager ITD</strong>
                                                         {/* <p>
                                         989 5th Avenue
                                         <br />
@@ -242,8 +244,8 @@ const App = () => {
                                                     <tr>
                                                         <th scope="col">Item <br /> No</th>
                                                         <th scope="col">Description of Materials</th>
-                                                        <th scope="col">Unit</th>
-                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col" className='text-center'>Unit</th>
+                                                        <th scope="col" className='text-center'>Quantity</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -254,8 +256,8 @@ const App = () => {
                                                             <br /> NPDC-DT-120
                                                             <br /> GJ356R
                                                         </td>
-                                                        <td>1</td>
-                                                        <td>1</td>
+                                                        <td className='text-center'>1</td>
+                                                        <td className='text-center'>1</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">2</th>
@@ -264,8 +266,8 @@ const App = () => {
                                                             <br /> NPDC-DT-120
                                                             <br /> GJ356R
                                                         </td>
-                                                        <td>3</td>
-                                                        <td>2</td>
+                                                        <td className='text-center'>3</td>
+                                                        <td className='text-center'>2</td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">3</th>
@@ -274,21 +276,24 @@ const App = () => {
                                                             <br /> NPDC-DT-120
                                                             <br /> GJ356R
                                                         </td>
-                                                        <td>10</td>
-                                                        <td>1</td>
+                                                        <td className='text-center'>10</td>
+                                                        <td className='text-center'>1</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
 
                                             <div className='row mt-5'>
-                                                <div className='col-6'>
+                                                <div className='col-8 pe-5'>
                                                     <strong>Delivered by:</strong>
-                                                    <p className='border-bottom'>Name: Ezue Edwin</p>
-                                                    <p className='border-bottom'>Name: DM</p>
-                                                    <img src='' className='border-bottom'></img>
+                                                    <p className='mt-2 mb-0'>Name: Ezue Edwin</p>
+                                                    <p className='mb-0'>Rank: DM</p>
+                                                    <p>Date: 10/6/2024</p>
                                                 </div>
-                                                <div className='col-6'>
-
+                                                <div className='col-4'>
+                                                    <strong className='pb-3'>Received by:</strong>
+                                                    <p className='mt-2 mb-0'>Name: Ekhator Iwinosa</p>
+                                                    <p className='mb-0'>Rank: DM</p>
+                                                    <p>Date: 10/6/2024</p>
                                                 </div>
                                             </div>
                                             {/* <div className="line-items">
@@ -346,10 +351,7 @@ const App = () => {
                                         </div>
 
                                         <div className="footer">
-                                            Copyright © 2014. Company name
-                                        </div>
-                                        <div className="thank-you">
-                                            <h5>Thank you for your business!</h5>
+                                            Copyright © 2024. NNPC
                                         </div>
                                     </div>
                                 </div>
