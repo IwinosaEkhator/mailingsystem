@@ -18,30 +18,30 @@ const Navbar = () => {
                     <div className="d-flex align-items-center">
                         <div className="dropdown">
                             <FaBell className='me-3 dropdown-toggle' style={{ backgroundColor: "none" }} data-bs-toggle="dropdown" aria-expanded="false" />
-                            <div class="dropdown-menu pt-0 mx-0 mt-4 rounded-3 shadow overflow-hidden w-300px" data-bs-theme="light">
-                                <form class="p-2 mb-2 bg-body-tertiary border-bottom">
-                                    <input type="search" class="form-control" autocomplete="false" placeholder="Type to filter..." />
+                            <div className="dropdown-menu pt-0 mx-0 mt-4 rounded-3 shadow overflow-hidden w-300px" data-bs-theme="light">
+                                <form className="p-2 mb-2 bg-body-tertiary border-bottom">
+                                    <input type="search" className="form-control" autocomplete="false" placeholder="Type to filter..." />
                                 </form>
-                                <ul class="list-unstyled mb-0">
-                                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                        <span class="d-inline-block bg-warning rounded-circle p-1"></span>
+                                <ul className="list-unstyled mb-0">
+                                    <li><a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <span className="d-inline-block bg-warning rounded-circle p-1"></span>
                                         Action
                                     </a></li>
-                                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                        <span class="d-inline-block bg-warning rounded-circle p-1"></span>
+                                    <li><a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <span className="d-inline-block bg-warning rounded-circle p-1"></span>
                                         Another action
                                     </a></li>
-                                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                        <span class="d-inline-block bg-warning rounded-circle p-1"></span>
+                                    <li><a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <span className="d-inline-block bg-warning rounded-circle p-1"></span>
                                         Something else here
                                     </a></li>
-                                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                        <span class="d-inline-block bg-warning rounded-circle p-1"></span>
+                                    <li><a className="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <span className="d-inline-block bg-warning rounded-circle p-1"></span>
                                         Separated link
                                     </a></li>
-                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><hr className="dropdown-divider" /></li>
                                     <li>
-                                        <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="#">
+                                        <a className="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="#">
                                             <BsTrash3 style={{fontSize: "18px"}}/>
                                             Clear
                                         </a>

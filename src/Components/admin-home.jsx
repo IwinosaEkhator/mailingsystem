@@ -13,6 +13,7 @@ import Pending from "./pending.js";
 import Requests from "./requests.js";
 import Approved from "./approved.js";
 import Declined from "./declined.js";
+import AdminForm from "./admin-form.js";
 
 const AdminHome = () => {
 
@@ -40,6 +41,7 @@ const AdminHome = () => {
                             <Route path="/pending" element={<Pending />} />
                             <Route path="/approved" element={<Approved />} />
                             <Route path="/declined" element={<Declined />} />
+                            <Route path="/add-form" element={<AdminForm />} />
                         </Routes>
 
                     </div>

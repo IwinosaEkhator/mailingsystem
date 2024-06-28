@@ -4,6 +4,7 @@ import "../Components/Admin/admin.css";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 
 
@@ -41,7 +42,7 @@ class Ordertable extends Component {
                     <td>{tItems}</td>
                     <td><span className={statusClass}>{statusText}</span></td>
                     <td>
-                        <button style={{ fontSize: "22px" }} className="btn"><AiOutlineEdit /></button>
+                        <Link to="/add-form" style={{ fontSize: "22px" }} className="btn"><AiOutlineEdit /></Link>
                         <button style={{ fontSize: "22px" }} className="btn" onClick={this.declinedChanges}><FaXmark /></button>
                         <button style={{ fontSize: "22px" }} className="btn" onClick={this.approvedChanges}><FaCheck /></button>
                     </td>

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import AdminFormComponents from './adminFormComp';
 import './Admin/admin.css';
 import { FaPrint } from 'react-icons/fa';
+import { IoIosArrowBack } from "react-icons/io";
 import Resquestorder from './request-order';
 import Requesttable from './request-table';
 import nnpclogo from "../Components/Assets/nnpc-logo.png"
 
-const App = () => {
+const AdminForm = () => {
     const [step, setStep] = useState(1);
     const [forms, setForms] = useState([{ id: Date.now(), description: { SN: '', domainName: '', computerName: '' }, unit: '', quantity: '' }]);
     const [formData, setFormData] = useState({
@@ -59,6 +60,7 @@ const App = () => {
 
     return (
         <div className="App">
+            <IoIosArrowBack className='fs-4 ms-5'/>
             <div className="container">
                 <h1 style={{ textAlign: 'center' }}>Internal Delivery Note</h1>
                 <form className="admin-form" onSubmit={handleSubmit}>
@@ -364,4 +366,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default AdminForm;
