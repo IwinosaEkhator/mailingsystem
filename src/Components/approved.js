@@ -13,7 +13,7 @@ const Approved = () => {
 
         <>
             <div className="details">
-                <Adminorder>
+                <Adminorder  header="Approved">
                     <Ordertable
                         idNum="npdc.b0000"
                         tName="Ekhator Iwinosa"

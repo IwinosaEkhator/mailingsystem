@@ -14,7 +14,7 @@ const Pending = () => {
         <>
             
             <div className="details">
-                <Adminorder>
+                <Adminorder header="Pending">
                     <Ordertable
                         idNum="npdc.b0000"
                         tName="Ekhator Iwinosa"

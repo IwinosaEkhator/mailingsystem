@@ -13,7 +13,7 @@ const Admin = () => {
 
     return (
         <>
-            <AdminHome/>
+            <AdminForm/>
         </>
     )
 }

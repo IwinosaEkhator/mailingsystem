@@ -13,7 +13,7 @@ const Declined = () => {
 
         <>
             <div className="details">
-                <Adminorder>
+                <Adminorder header="Declined">
                     <Ordertable
                         idNum="npdc.b0000"
                         tName="Ekhator Iwinosa"

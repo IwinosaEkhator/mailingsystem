@@ -44,7 +44,7 @@ const Dashboard = () => {
                 </Card>
             </div>
             <div className="details">
-                <Adminorder>
+                <Adminorder header= "Recent Orders">
                     <Ordertable
                         idNum="npdc.b0000"
                         tName="Ekhator Iwinosa"

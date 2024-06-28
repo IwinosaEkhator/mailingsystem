@@ -9,7 +9,7 @@ const Adminorder = (props) => {
         <> 
              <div className="recentOrders">
                     <div className="cardHeader">
-                        <h2>Recent Orders</h2>
+                        <h2>{props.header}</h2>
                         <a href="#" className="btn">View All</a>
                     </div>
 
