@@ -108,7 +108,7 @@ const AdminForm = () => {
                         </div>
                     )}
 
-                    {step === 2 && (
+{step === 2 && (
                         <div className='details' style={{ width: "1000px" }}>
                             <Resquestorder addForm={addForm}>
                                 {forms.map((form, index) => (
