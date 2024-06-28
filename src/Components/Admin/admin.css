@@ -179,9 +179,7 @@ header .image-text .profession {
 }
 
 .sidebar header .image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  
 }
 
 .sidebar header .image img {
@@ -191,7 +189,7 @@ header .image-text .profession {
 
 .sidebar header .toggle {
   position: absolute;
-  top: 50%;
+  top: 67%;
   right: -25px;
   transform: translateY(-50%) rotate(180deg);
   height: 25px;
@@ -213,6 +211,7 @@ header .image-text .profession {
 
 .sidebar.close .toggle {
   transform: translateY(-50%) rotate(0deg);
+  right: -95px;
 }
 
 .sidebar .menu {
@@ -503,7 +502,11 @@ header .image-text .profession {
   left: 90px;
 }
 
-.dashboard-navbar.dark {
+.main.close .dashboard-navbar{
+  margin-left: 90px;
+}
+
+.dashboard-navbar .dark {
   background-color: var(--sidebar-color) !important;
   color: var(--text-color) !important;
 }
