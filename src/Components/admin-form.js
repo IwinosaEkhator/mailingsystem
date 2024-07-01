@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import AdminFormComponents from './adminFormComp';
 import './Admin/admin.css';
-import { FaPrint } from 'react-icons/fa';
+import { FaPrint, FaRegShareSquare, FaDownload } from 'react-icons/fa';
 import { IoIosArrowBack } from "react-icons/io";
 import Resquestorder from './request-order';
 import Requesttable from './request-table';
-import nnpclogo from "../Components/Assets/nnpc-logo.png"
+import nnpclogo from "../Components/Assets/nnpc-logo.png";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const AdminForm = () => {
     const [step, setStep] = useState(1);
@@ -35,7 +37,9 @@ const AdminForm = () => {
     }
 
     const prevStep = () => {
-        setStep(step - 1);
+        if (step > 1) {
+            setStep(step - 1);
+        }
     }
 
     const handleSubmit = (event) => {
@@ -53,14 +57,61 @@ const AdminForm = () => {
         setForms(forms.filter(form => form.id !== id));
     };
 
-    const handleUpdateDescription = (id, description, unit, quantity) => {
-        setForms(forms.map(form => form.id === id ? { ...form, description, unit, quantity } : form));
+    const handleUpdateDescription = (id, updatedDescription, unit, quantity) => {
+        setForms(forms.map(form => form.id === id ? { ...form, description: updatedDescription, unit, quantity } : form));
     };
 
+    const handlePrint = () => {
+        window.print();
+    };
+
+    const handleDownload = () => {
+        const input = document.getElementById('invoice');
+        html2canvas(input, { scale: 2 }).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const imgWidth = pdfWidth;
+            const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            if (imgHeight <= pdfHeight) {
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+            } else {
+                let heightLeft = imgHeight;
+                let position = 0;
+                while (heightLeft > 0) {
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pdfHeight;
+                    position -= pdfHeight;
+                    if (heightLeft > 0) {
+                        pdf.addPage();
+                    }
+                }
+            }
+            pdf.save("invoice.pdf");
+        });
+    };
+
+    const handleShare = async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Invoice',
+                    text: 'Check out this invoice!',
+                    url: window.location.href
+                });
+            } catch (err) {
+                console.error('Error sharing:', err);
+            }
+        } else {
+            alert('Share not supported on this browser, please copy the link manually.');
+        }
+    };
 
     return (
         <div className="App">
-            <IoIosArrowBack className='fs-4 ms-5'/>
+            <button className='btn ms-5' onClick={prevStep} ><IoIosArrowBack className='fs-4' /></button>
             <div className="container">
                 <h1 style={{ textAlign: 'center' }}>Internal Delivery Note</h1>
                 <form className="admin-form" onSubmit={handleSubmit}>
@@ -108,7 +159,7 @@ const AdminForm = () => {
                         </div>
                     )}
 
-{step === 2 && (
+                    {step === 2 && (
                         <div className='details' style={{ width: "1000px" }}>
                             <Resquestorder addForm={addForm}>
                                 {forms.map((form, index) => (
@@ -123,7 +174,6 @@ const AdminForm = () => {
                                         removeForm={removeForm}
                                     />
                                 ))}
-
                             </Resquestorder>
                             <div className="li-group w-25">
                                 <button className="admin-form-button" type="button" onClick={prevStep}>Back</button>
@@ -131,6 +181,7 @@ const AdminForm = () => {
                             </div>
                         </div>
                     )}
+
                     {step === 3 && (
                         <div className='list-group mt-1'>
                             <div className='d-flex justify-space-between'>
@@ -170,7 +221,6 @@ const AdminForm = () => {
                                         fValue={formData.de_date}
                                     />
                                 </div>
-
                             </div>
 
                             <div className='li-group mx-5 px-5'>
@@ -179,19 +229,25 @@ const AdminForm = () => {
                             </div>
                         </div>
                     )}
+
                     {step === 4 && submitted && (
                         <div className="receipt-content">
                             <div className="container bootstrap snippets bootdey">
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <div className="invoice-wrapper">
+                                        <div className='d-flex justify-content-end mt-4'>
+                                            <button className='btn me-2 btn-outline-success' title='Print the receipt' onClick={handlePrint}><FaPrint style={{ fontSize: "25px" }} /></button>
+                                            <button className='btn me-2 btn-outline-success' title='Download' style={{ fontSize: "25px" }} onClick={handleDownload}><FaDownload style={{ fontSize: "25px" }} /></button>
+                                            <button className='btn btn-outline-success' title='Share' onClick={handleShare}><FaRegShareSquare style={{ fontSize: "25px" }} /></button>
+                                        </div>
+                                        <div className="invoice-wrapper" id="invoice">
                                             <div className="intro row text-capitalize">
                                                 <div className='col-2'>
-                                                    <img src={nnpclogo} className='w-100'></img>
+                                                    <img src={nnpclogo} className='w-100' alt="NNPC Logo"></img>
                                                 </div>
                                                 <div className='col-8 text-center'>
                                                     <h5>
-                                                        NNPC E & P Limited <br /> ( A Subsidiary of NNPC)
+                                                        NNPC E & P Limited <br /> (A Subsidiary of NNPC)
                                                     </h5>
                                                     <h3>
                                                         <strong>Internal Delivery Note</strong>
@@ -206,8 +262,8 @@ const AdminForm = () => {
                                                         <strong>000000001</strong>
                                                     </div>
                                                     <div className="col-sm-6 text-end">
-                                                        <span>Delivery Date</span>
-                                                        <strong>Jul 09, 2014 - 12:20 pm</strong>
+                                                        <span>Date</span>
+                                                        <strong>{formData.date}</strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -216,18 +272,17 @@ const AdminForm = () => {
                                                 <div className="row">
                                                     <div className="col-sm-6">
                                                         <span>From</span>
-                                                        <strong>Manager ITD</strong>
-                                                        {/* <p>
-                                        989 5th Avenue
-                                        <br />
-                                        City of Monterrey
-                                        <br />
-                                        55839
-                                        <br />
-                                        USA
-                                        <br />
-                                        <a href="mailto:jonnydeff@gmail.com">jonnydeff@gmail.com</a>
-                                      </p> */}
+                                                        <strong>{formData.from}</strong>
+                                                        {/* <p>                                                            989 5th Avenue
+                                                            <br />
+                                                            City of Monterrey
+                                                            <br />
+                                                            55839
+                                                            <br />
+                                                            USA
+                                                            <br />
+                                                            <a href="mailto:jonnydeff@gmail.com">jonnydeff@gmail.com</a>
+                                                        </p> */}
                                                     </div>
                                                     <div className="col-sm-6 text-end">
                                                         <span>To</span>
@@ -240,8 +295,7 @@ const AdminForm = () => {
                                                 </div>
                                             </div>
 
-
-                                            <table class="table">
+                                            <table className="table">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Item <br /> No</th>
@@ -298,62 +352,11 @@ const AdminForm = () => {
                                                     <p>Date: 10/6/2024</p>
                                                 </div>
                                             </div>
-                                            {/* <div className="line-items">
-                                  <div className="headers clearfix">
-                                    <div className="row">
-                                      <div className="col-xs-4">Description</div>
-                                      <div className="col-xs-3">Quantity</div>
-                                      <div className="col-xs-5 text-end">Amount</div>
-                                    </div>
-                                  </div>
-                                  <div className="items">
-                                    <div className="row item">
-                                      <div className="col-xs-4 desc">Html theme</div>
-                                      <div className="col-xs-3 qty">3</div>
-                                      <div className="col-xs-5 amount text-end">$60.00</div>
-                                    </div>
-                                    <div className="row item">
-                                      <div className="col-xs-4 desc">Bootstrap snippet</div>
-                                      <div className="col-xs-3 qty">1</div>
-                                      <div className="col-xs-5 amount text-end">$20.00</div>
-                                    </div>
-                                    <div className="row item">
-                                      <div className="col-xs-4 desc">Snippets on bootdey</div>
-                                      <div className="col-xs-3 qty">2</div>
-                                      <div className="col-xs-5 amount text-end">$18.00</div>
-                                    </div>
-                                  </div>
-                                  <div className="total text-end">
-                                    <p className="extra-notes">
-                                      <strong>Extra Notes</strong>
-                                      Please send all items at the same time to shipping address by next week.
-                                      Thanks a lot.
-                                    </p>
-                                    <div className="field">
-                                      Subtotal <span>$379.00</span>
-                                    </div>
-                                    <div className="field">
-                                      Shipping <span>$0.00</span>
-                                    </div>
-                                    <div className="field">
-                                      Discount <span>4.5%</span>
-                                    </div>
-                                    <div className="field grand-total">
-                                      Total <span>$312.00</span>
-                                    </div>
-                                  </div>
-                  
-                                  <div className="print">
-                                    <a href="#">
-                                      <FaPrint />
-                                      Print this receipt
-                                    </a>
-                                  </div>
-                                </div> */}
-                                        </div>
 
-                                        <div className="footer">
-                                            Copyright © 2024. NNPC
+                                            <div className="footer">
+                                                Copyright © 2024. NNPC
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

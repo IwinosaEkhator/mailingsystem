@@ -17,15 +17,21 @@ class Requesttable extends Component {
     }
 
     handleEditClick = () => {
-        const { isEditing, SN, domainName, computerName, unit, quantity } = this.state;
+        const { isEditing } = this.state;
 
         if (isEditing) {
-            const updatedDescription = { SN, domainName, computerName };
-            this.props.handleUpdateDescription(this.props.tKey, updatedDescription, unit, quantity);
+            const updatedDescription = {
+                SN: this.state.SN,
+                domainName: this.state.domainName,
+                computerName: this.state.computerName,
+            };
+
+            this.props.handleUpdateDescription(this.props.tKey, updatedDescription, this.state.unit, this.state.quantity);
         }
 
         this.setState({ isEditing: !isEditing });
     };
+
 
     toggleCollapse = () => {
         this.setState((prevState) => ({ isCollapsed: !prevState.isCollapsed }));
